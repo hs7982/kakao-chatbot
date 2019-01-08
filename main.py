@@ -126,8 +126,16 @@ def Meal():
             lunch = mysql_lunch(5)
             dinner = mysql_dinner(5)
         
+        elif day_data == "토요일":
+            lunch = mysql_lunch(6)
+            dinner = mysql_dinner(6)
+
+        elif day_data == "일요일":
+            lunch = mysql_lunch(0)
+            dinner = mysql_dinner(0)
+        
         else:
-            msg = "주말에는 급식이 제공되지 않습니다."
+            print("Error")
 
         msg = "[중식]\n" + str(lunch[0]) + "\n[석식]\n" + str(dinner[0])+"\n※위 식단은 학교나 시장 사정에 의하여 변경될 수 있습니다."
         dataSend = {
