@@ -69,7 +69,7 @@ def nies_parser(eduCode, schoolCode, when):
         
         #정보가 없을경우
         if menu == '' or menu == ' ':
-            menu = '방학에는 급식이 제공되지 않습니다.\n'
+            menu = '급식 정보가 없습니다.\n'
         
         #db로 저장
         mysql_in(today, menu, when)
