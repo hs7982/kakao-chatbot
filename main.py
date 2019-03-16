@@ -53,7 +53,7 @@ def mysql_dinner(day):
 
 @application.route('/')
 def Home():
-    page = "Kakao i Chatbot<br/>Skill Server<br/><br/>- Algorithm Factory -"
+    page = "Algorithm Factory api server"
     return page
 
 @application.route('/meal', methods=['POST'])
