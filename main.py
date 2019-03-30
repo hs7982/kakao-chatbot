@@ -107,42 +107,61 @@ def Meal():
     
     elif day_data[1:] == "요일":        
         if day_data == "월요일":
-            lunch = mysql_lunch(1)
-            dinner = mysql_dinner(1)
+            sel_day = 1
+            lunch = mysql_lunch(sel_day)
+            dinner = mysql_dinner(sel_day)
 
         elif day_data == "화요일":
-            lunch = mysql_lunch(2)
-            dinner = mysql_dinner(2)
+            sel_day = 2
+            lunch = mysql_lunch(sel_day)
+            dinner = mysql_dinner(sel_day)
 
         elif day_data == "수요일":
-            lunch = mysql_lunch(3)
-            dinner = mysql_dinner(3)
+            sel_day = 3
+            lunch = mysql_lunch(sel_day)
+            dinner = mysql_dinner(sel_day)
 
         elif day_data == "목요일":
-            lunch = mysql_lunch(4)
-            dinner = mysql_dinner(4)
+            sel_day = 4
+            lunch = mysql_lunch(sel_day)
+            dinner = mysql_dinner(sel_day)
 
         elif day_data == "금요일":
-            lunch = mysql_lunch(5)
-            dinner = mysql_dinner(5)
+            sel_day = 5
+            lunch = mysql_lunch(sel_day)
+            dinner = mysql_dinner(sel_day)
         
         elif day_data == "토요일":
-            lunch = mysql_lunch(6)
-            dinner = mysql_dinner(6)
+            sel_day = 6
+            lunch = mysql_lunch(sel_day)
+            dinner = mysql_dinner(sel_day)
 
         elif day_data == "일요일":
-            lunch = mysql_lunch(0)
-            dinner = mysql_dinner(0)
+            sel_day = 0
+            lunch = mysql_lunch(sel_day)
+            dinner = mysql_dinner(sel_day)
         
         else:
             print("Error")
 
         msg = "[중식]\n" + str(lunch[0]) + "\n[석식]\n" + str(dinner[0])+"\n※위 식단은 학교나 시장 사정에 의하여 변경될 수 있습니다."
+        
+        dt = datetime.datetime.now()
+        day = dt.weekday()
+        if day+1 > sel_day:
+            past_msg = "[안내] 이미 제공된 " +day_data+ "의 식단을 표시중입니다.\n다음주의 식단 정보는 일요일에 업데이트되니 참고 바랍니다.\n\n"
+        else:
+            past_msg = ""
+        
+        print(day_data)
+        print("오늘"+str(day+1))
+        print("요청"+str(sel_day))
+
         dataSend = {
             "version" : "2.0",
             "data" : {
                 "day" : day_data + "의 식단입니다.",
-                "meal" : msg,
+                "meal" : past_msg + msg,
             }
         }
 
