@@ -152,10 +152,6 @@ def Meal():
             past_msg = "[안내] 이미 제공된 " +day_data+ "의 식단을 표시중입니다.\n다음주의 식단 정보는 일요일에 업데이트되니 참고 바랍니다.\n\n"
         else:
             past_msg = ""
-        
-        print(day_data)
-        print("오늘"+str(day+1))
-        print("요청"+str(sel_day))
 
         dataSend = {
             "version" : "2.0",
