@@ -1,5 +1,4 @@
 # 카카오톡 플러스친구 챗봇
-> 부산중앙고등학교 챗봇의 스킬서버
 
 *Team. Algorithm Factory*
 
