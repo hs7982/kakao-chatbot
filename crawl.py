@@ -6,7 +6,7 @@ import passwd
 import logging
 
 log = logging.getLogger()
-log.setLevel(logging.INFO)
+log.setLevel(logging.DEBUG)
 
 formatter = logging.Formatter('%(asctime)s %(name)s - [%(levelname)s]: %(message)s')
 
@@ -50,7 +50,7 @@ def mysql_del():
         log.error("DB서버에서 기존 식단 데이터를 지우는 중 오류가 발생하였습니다.")
 
 def mysql_in(day, meal, when):
-    log.info("DB서버에 저장중입니다. 종류: "+when+" 요일: "+str(day))
+    log.info("DB서버에 저장중입니다. 종류: "+when+", 요일: "+str(day))
     # db연결
     conn = pymysql.connect(host="localhost", user="root", passwd=pw.passwd, db="jungang_meal", charset='utf8')
     day = str(day)
@@ -67,7 +67,7 @@ def nies_parser(eduCode, schoolCode, when):
     now = datetime.datetime.now()
     log.info("NEIS에서 주간 급식정보를 가져옵니다. 종류: "+when)
     url = 'http://stu.'+ eduCode +'/sts_sci_md01_001.do?schulCode='+ schoolCode +'&schulCrseScCode=4&schMmealScCode='+ when +'&schYmd='+now.strftime('%Y.%m.%d')
-    print(url)
+    log.debug(url)
     req = urllib.request.urlopen(url, timeout=3)
     soup = bs(req, 'html.parser')
     log.info("데이터 처리중... 종류: "+when)
