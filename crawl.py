@@ -3,6 +3,20 @@ import pymysql
 import datetime
 from bs4 import BeautifulSoup as bs
 import passwd
+import logging
+
+log = logging.getLogger()
+log.setLevel(logging.INFO)
+
+formatter = logging.Formatter('%(asctime)s %(name)s - [%(levelname)s]: %(message)s')
+
+stream_handler = logging.StreamHandler()
+stream_handler.setFormatter(formatter)
+log.addHandler(stream_handler)
+
+file_handler = logging.FileHandler('log.log')
+file_handler.setFormatter(formatter)
+log.addHandler(file_handler)
 
 pw = passwd.Passwd()
 
@@ -21,7 +35,7 @@ def mysql_del():
         #curs생성
         curs = conn.cursor()
     except:
-        print("db연결 중 오류가 발생했습니다. mysql_del")
+        log.error("DB서버 연결에 실패하였습니다.")
     #데티어 비우기
     try:
         sql=("""TRUNCATE `week_meal_2`""")
@@ -31,12 +45,12 @@ def mysql_del():
         curs.execute(sql)
         conn.commit()
         conn.close()
-        print("기존 DB데이터를 비웠습니다.")
+        log.info("DB서버에서 기존 식단 데이터를 비웠습니다.")
     except:
-        print("db를 비우는 중 오류가 발생하였습니다.")
+        log.error("DB서버에서 기존 식단 데이터를 지우는 중 오류가 발생하였습니다.")
 
 def mysql_in(day, meal, when):
-    print("DB에 저장중입니다."+when+","+str(day))
+    log.info("DB서버에 저장중입니다. 종류: "+when+" 요일: "+str(day))
     # db연결
     conn = pymysql.connect(host="localhost", user="root", passwd=pw.passwd, db="jungang_meal", charset='utf8')
     day = str(day)
@@ -51,12 +65,12 @@ def mysql_in(day, meal, when):
 
 def nies_parser(eduCode, schoolCode, when):
     now = datetime.datetime.now()
-    print("NIES에서 주간 급식정보를 가져옵니다."+when)
+    log.info("NEIS에서 주간 급식정보를 가져옵니다. 종류: "+when)
     url = 'http://stu.'+ eduCode +'/sts_sci_md01_001.do?schulCode='+ schoolCode +'&schulCrseScCode=4&schMmealScCode='+ when +'&schYmd='+now.strftime('%Y.%m.%d')
     print(url)
     req = urllib.request.urlopen(url, timeout=3)
     soup = bs(req, 'html.parser')
-    print("데이터 처리중..."+when)
+    log.info("데이터 처리중... 종류: "+when)
     meal = soup.find_all('td', {'class':'textC'})[7:14]
     
     #0=일, 1=월, 2=화 ... 6=토
@@ -75,8 +89,8 @@ def nies_parser(eduCode, schoolCode, when):
         mysql_in(today, menu, when)
 
         today = today+1
-print("NIES 급식 크롤러를 시작합니다.")
+log.info("NEIS 급식 크롤러를 시작합니다.")
 mysql_del()
 nies_parser(eduCode, schoolCode, lunch)
 nies_parser(eduCode, schoolCode, dinner)
-print("성공")
+log.info("작업을 완료하였습니다.")

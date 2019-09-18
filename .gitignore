@@ -1,3 +1,4 @@
 uwsgi.log
 __pycache__/
 passwd.py
+log.log
