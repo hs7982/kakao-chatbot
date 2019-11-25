@@ -1,6 +1,6 @@
 # 카카오톡 플러스친구 챗봇
 
-*Team. Algorithm Factory*
+*부산중앙고 Team. Algorithm Factory*
 
 ---
 
