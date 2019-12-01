@@ -56,6 +56,13 @@ def Home():
     page = "Algorithm Factory api server"
     return page
 
+@application.route('/log')
+def log():
+    logf = open("log.log", 'r')
+    logr = logf.read()
+    logf.close()
+    return logr
+
 @application.route('/meal', methods=['POST'])
 def Meal():
     msg = ''

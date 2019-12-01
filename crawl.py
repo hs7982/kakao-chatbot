@@ -14,7 +14,7 @@ stream_handler = logging.StreamHandler()
 stream_handler.setFormatter(formatter)
 log.addHandler(stream_handler)
 
-file_handler = logging.FileHandler('log.log')
+file_handler = logging.FileHandler('/home/ubuntu/kakaobot/log.log')
 file_handler.setFormatter(formatter)
 log.addHandler(file_handler)
 
