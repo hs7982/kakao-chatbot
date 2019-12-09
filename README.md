@@ -11,3 +11,8 @@
 * VS Code
 * AWS(Ubuntu 18.04.1)
 
+## 카카오톡 채널
+[부산중앙고 챗봇](https://pf.kakao.com/_tvlxlj)
+
+## 카카오i
+[카카오i 오픈빌더](https://i.kakao.com/)를 이용해 만들어졌으며, 스킬서버로 활용됩니다.
