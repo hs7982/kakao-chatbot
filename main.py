@@ -62,7 +62,7 @@ def mysql_sc(month):
         conn.commit
         conn.close()
     except:
-        schedule = "%s 해당월의 정보가 없습니다."%month
+        schedule = "%s: 해당월의 정보가 없습니다.\n학년도 시작 이후 정보가 업데이트 될 예정입니다."%month
     
     return schedule
 
