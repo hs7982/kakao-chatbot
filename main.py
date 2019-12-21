@@ -179,7 +179,6 @@ def Meal():
 
     if day_data == "오늘":
         day = dt.weekday()
-        print(day)
         if day == 6:
             lunch = mysql_lunch(0)
             dinner = mysql_dinner(0)
