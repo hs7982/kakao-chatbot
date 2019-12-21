@@ -6,7 +6,6 @@ import passwd
 application = Flask(__name__)
 
 pw = passwd.Passwd()
-dt = datetime.datetime.now()
 
 def mysql_conn():
     try:
@@ -86,6 +85,7 @@ def schedule():
     content = dataReceive['action']
     params = content['params']
     scm_data = params['schedule']
+    dt = datetime.datetime.now()
 
     if scm_data == "이번달":
         month=dt.strftime("%y")+str(dt.month)
@@ -175,9 +175,11 @@ def Meal():
     content = dataReceive['action']
     params = content['params']
     day_data = params['meal_day']
+    dt = datetime.datetime.now()
 
     if day_data == "오늘":
         day = dt.weekday()
+        print(day)
         if day == 6:
             lunch = mysql_lunch(0)
             dinner = mysql_dinner(0)
