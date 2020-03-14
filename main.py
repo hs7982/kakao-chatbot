@@ -96,8 +96,8 @@ def schedule():
         dataSend = {
             "version" : "2.0",
             "data" : {
-                "scmonth" : msg,
-                "schedule" : schedule,
+                "title" : msg,
+                "content" : schedule,
             }
         }
     
@@ -115,8 +115,8 @@ def schedule():
         dataSend = {
             "version" : "2.0",
             "data" : {
-                "scmonth" : msg,
-                "schedule" : schedule,
+                "title" : msg,
+                "content" : schedule,
             }
         }
 
@@ -151,8 +151,8 @@ def schedule():
         dataSend = {
             "version" : "2.0",
             "data" : {
-                "scmonth" : msg,
-                "schedule" : schedule,
+                "title" : msg,
+                "content" : schedule,
             }
         }
 
@@ -160,8 +160,8 @@ def schedule():
         dataSend = {
             "version" : "2.0",
             "data" : {
-                "scmonth" : "죄송합니다.",
-                "schedule" : "오류가 발생하였습니다. 잠시 후 다시 시도하거나, 관리자에게 문의해주세요.",
+                "title" : "죄송합니다.",
+                "content" : "오류가 발생하였습니다. 잠시 후 다시 시도하거나, 관리자에게 문의해주세요.",
             }
         }
 
@@ -189,8 +189,8 @@ def Meal():
         dataSend = {
             "version" : "2.0",
             "data" : {
-                "day" : "오늘의 식단입니다.",
-                "meal" : msg,
+                "title" : "오늘의 식단입니다.",
+                "content" : msg,
             }
         }
 
@@ -210,8 +210,8 @@ def Meal():
         dataSend = {
             "version" : "2.0",
             "data" : {
-                "day" : "내일의 식단입니다.",
-                "meal" : msg,
+                "title" : "내일의 식단입니다.",
+                "content" : msg,
             }
         }
     
@@ -262,15 +262,15 @@ def Meal():
         #이미 지나간 요일일 경우 안내
         #토요일에 월요일의 정보를 요청 -> 이미 제공된 급식 정보임을 안내
         if day+1 > sel_day:
-            past_msg = "[안내] 이미 제공된 " +day_data+ "의 식단을 표시중입니다.\n다음주의 식단 정보는 일요일에 업데이트되니 참고 바랍니다.\n\n"
+            notice = "[안내] 이미 제공된 " +day_data+ "의 식단을 표시중입니다.\n다음주의 식단 정보는 일요일에 업데이트되니 참고 바랍니다.\n\n"
         else:
-            past_msg = ""
+            notice = ""
 
         dataSend = {
             "version" : "2.0",
             "data" : {
-                "day" : day_data + "의 식단입니다.",
-                "meal" : past_msg + msg,
+                "title" : day_data + "의 식단입니다.",
+                "content" : notice + msg,
             }
         }
 
@@ -278,8 +278,8 @@ def Meal():
         dataSend = {
             "version" : "2.0",
             "data" : {
-                "day" : "죄송합니다.",
-                "meal" : "오류가 발생하였습니다. 잠시 후 다시 시도하거나, 관리자에게 문의해주세요.",
+                "title" : "죄송합니다.",
+                "content" : "오류가 발생하였습니다. 잠시 후 다시 시도하거나, 관리자에게 문의해주세요.",
             }
         }
     return jsonify(dataSend)
